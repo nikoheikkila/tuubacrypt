@@ -3,7 +3,6 @@ import pytest
 from string import punctuation, whitespace
 from tuubacrypt import TuubaCrypt
 
-
 NON_ALPHABET = punctuation + whitespace
 
 PLAIN_DATA = [
@@ -16,23 +15,28 @@ PLAIN_DATA = [
 ]
 
 ENCRYPTED_DATA = [
-    [' ', ' '],
+    ['', ''],
     ['0', '9'],
     ['BDFHJ', 'ABCDE'],
     ['23F89DS SFH :) JÄGERMEISTER 2aabMOMENTAS Tuuba HIEFU2', '11C44XL KWX :) YÄURDXORAAKW 0aabPQNEMRXO Ouuba BBWWK5'],
     ['5439875348976 345 876345876 876389456987364587 63485769374659876345 9837465987 634958763948569876     387458768374 35876 !! 342876239846', '4205318558853 999 197333531 208488222420574464 28817868140192086222 5370675864 288279751603991975     153991978251 90208 !! 441642772056']
 ]
 
-def test_encrypt_for_non_alphabet_string_returns_itself():
-    tuuba = TuubaCrypt()
+@pytest.fixture
+def tuuba():
+    return TuubaCrypt()
+
+def test_encrypt_for_non_alphabet_string_returns_itself(tuuba):
     assert tuuba.encrypt(NON_ALPHABET) == NON_ALPHABET
 
+def test_encryption_is_idempotent(tuuba):
+    plain = "A Quick Brown Fox Jumped the Lazy Dog 100 Times!"
+    assert tuuba.decrypt(tuuba.encrypt(plain)) == plain
+
 @pytest.mark.parametrize("plain, expected_encrypted", PLAIN_DATA)
-def test_encrypt(plain, expected_encrypted):
-    tuuba = TuubaCrypt()
+def test_encrypt(tuuba, plain, expected_encrypted):
     assert expected_encrypted == tuuba.encrypt(plain)
 
 @pytest.mark.parametrize("encrypted, expected_decrypted", ENCRYPTED_DATA)
-def test_decrypt(encrypted: str, expected_decrypted: str):
-    tuuba = TuubaCrypt()
+def test_decrypt(tuuba, encrypted: str, expected_decrypted: str):
     assert expected_decrypted == tuuba.decrypt(encrypted)
