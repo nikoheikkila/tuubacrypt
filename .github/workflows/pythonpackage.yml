@@ -28,3 +28,9 @@ jobs:
       run: poetry run mypy --strict tuubacrypt
     - name: Run Unit Tests
       run: poetry run pytest -v
+    - name: Publish to PyPI
+      if: success()
+      env:
+        PYPI_USER: __token__
+        PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+      run: poetry publish --build -u ${PYPI_USER} -p ${PYPI_TOKEN}
