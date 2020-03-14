@@ -2,7 +2,7 @@ import io
 import click
 
 from typing import Optional
-from tuubacrypt import TuubaCrypt
+from tuubacrypt import TuubaCrypt # type: ignore
 
 def println(text: str) -> None:
     click.echo(text, nl=False)
@@ -21,7 +21,7 @@ def main(ctx: click.Context) -> None:
 @main.command()
 @click.pass_context
 @click.argument('text', type=click.STRING, required=False)
-def encrypt(ctx: click.Context, text):
+def encrypt(ctx: click.Context, text: str) -> None:
     tcrypt = ctx.obj['tcrypt']
 
     if not text:
@@ -32,7 +32,7 @@ def encrypt(ctx: click.Context, text):
 @main.command()
 @click.pass_context
 @click.argument('text', type=click.STRING, required=False)
-def decrypt(ctx: click.Context, text: str):
+def decrypt(ctx: click.Context, text: str) -> None:
     tcrypt = ctx.obj['tcrypt']
 
     if not text:
