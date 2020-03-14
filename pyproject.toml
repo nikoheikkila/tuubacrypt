@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tuubacrypt"
-version = "0.3.1"
+version = "0.3.2"
 description = "TuubaCrypt - the least useful encryption and decryption algorithm."
 authors = ["Niko Heikkilä <yo@nikoheikkila.fi>"]
 license = "WTFPL"

@@ -14,7 +14,7 @@ def get_stream() -> str:
 @click.version_option()
 @click.pass_context
 def main(ctx: click.Context) -> None:
-    """The main command for CLI usage."""
+    """The least useful encryption and decryption algorithm."""
     ctx.ensure_object(dict)
     ctx.obj['tcrypt'] = TuubaCrypt()
 
@@ -22,6 +22,7 @@ def main(ctx: click.Context) -> None:
 @click.pass_context
 @click.argument('text', type=click.STRING, required=False)
 def encrypt(ctx: click.Context, text: str) -> None:
+    """Encrypt data from STDIN or <TEXT>"""
     tcrypt = ctx.obj['tcrypt']
 
     if not text:
@@ -33,6 +34,7 @@ def encrypt(ctx: click.Context, text: str) -> None:
 @click.pass_context
 @click.argument('text', type=click.STRING, required=False)
 def decrypt(ctx: click.Context, text: str) -> None:
+    """Decrypt data from STDIN or <TEXT>"""
     tcrypt = ctx.obj['tcrypt']
 
     if not text:
