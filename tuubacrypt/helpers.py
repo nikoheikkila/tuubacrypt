@@ -1,6 +1,7 @@
 """Module containing different helper scripts."""
 
-ORDERS = {'A': 65, 'Z': 90}
+ORDERS = {"A": 65, "Z": 90}
+
 
 def is_digit(char: str) -> bool:
     """Checks if a char can be converted to an integer."""
@@ -11,5 +12,6 @@ def is_digit(char: str) -> bool:
 
     return True
 
+
 def is_uppercase(char: str) -> bool:
-    return ord(char) in range(ORDERS['A'], ORDERS['Z'] + 1)
+    return ord(char) in range(ORDERS["A"], ORDERS["Z"] + 1)

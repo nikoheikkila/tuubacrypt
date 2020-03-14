@@ -2,38 +2,32 @@
 
 import re
 
-from typing import Callable
-from .deck import Deck
+from .deck import Magician, Shiftable
 
-Shiftable = Callable[[str, int], str]
 
-class TuubaCrypt():
+class TuubaCrypt:
     """Class providing the methods for encryption and decryption"""
 
-    T_PATTERN = "[A-Z0-9]+"
+    T_PATTERN = "^[A-Z0-9]$"
 
     def __init__(self) -> None:
+        self.magician = Magician()
         self.pattern = re.compile(self.T_PATTERN)
 
     def encrypt(self, text: str) -> str:
-        self.text = text
-
-        return self.translate(Deck.shift_right)
-
+        return self.translate(text, self.magician.right)
 
     def decrypt(self, text: str) -> str:
-        self.text = text
+        return self.translate(text, self.magician.left)
 
-        return self.translate(Deck.shift_left)
-
-    def translate(self, shift: Shiftable) -> str:
-        if not self.text:
+    def translate(self, text: str, shift: Shiftable) -> str:
+        if not text:
             return ""
 
         result = []
         i = 1
 
-        for char in self.text:
+        for char in text:
             if not self.should_translate(char):
                 result.append(char)
                 continue
