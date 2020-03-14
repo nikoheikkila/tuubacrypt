@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tuubacrypt"
-version = "0.2.1"
+version = "0.3.0"
 description = "TuubaCrypt - the least useful encryption and decryption algorithm."
 authors = ["Niko Heikkilä <yo@nikoheikkila.fi>"]
 license = "WTFPL"
@@ -11,8 +11,12 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules"
 ]
 
+[tool.poetry.scripts]
+tcrypt = "cli:main"
+
 [tool.poetry.dependencies]
 python = "^3.7"
+click = "^7.1.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
