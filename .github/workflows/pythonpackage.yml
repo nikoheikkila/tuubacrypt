@@ -27,7 +27,7 @@ jobs:
     - name: Lint Code
       run: poetry run mypy --strict tuubacrypt
     - name: Run Unit Tests
-      run: poetry run pytest -v
+      run: poetry run pytest -v --cov=tuubacrypt
     - name: Publish to PyPI
       if: success()
       env:
